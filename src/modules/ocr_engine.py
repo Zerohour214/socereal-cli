@@ -1,5 +1,7 @@
 import onnxruntime as ort
 from rapidocr_onnxruntime import RapidOCR
+from src.modules.preprocessing.roi import auto_crop_serial_region
+
 
 class OCRService:
     def __init__(self):
@@ -9,7 +11,8 @@ class OCRService:
 
     def __call__(self, image_path: str):
         try:
-            result, _ = self.ocr(image_path)
+            img = auto_crop_serial_region(image_path)
+            result, _ = self.ocr(img)
             return result  # This is a list of (box, text, conf) tuples
         except Exception as e:
             from logging import error
