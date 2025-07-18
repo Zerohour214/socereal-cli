@@ -26,15 +26,3 @@ def validate_text(text: str) -> Optional[str]:
         weirds = find_abnormal_characters(text)
         return f"Abnormal characters detected: {weirds}"
     return None
-
-# --- Optional: 2nd OCR pass with alternate model
-
-def secondary_ocr(alt_ocr_engine, image_path: str) -> str:
-    """Run a secondary OCR model on the same image. Return its text result."""
-    try:
-        result, _ = alt_ocr_engine(image_path)
-        if result:
-            return " ".join([text for _, text, _ in result])
-    except Exception as e:
-        logging.error(f"Secondary OCR error for {image_path}: {e}")
-    return ""
