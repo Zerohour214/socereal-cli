@@ -7,12 +7,17 @@ class OCRService:
         ort.set_default_logger_severity(3)
         self.ocr = RapidOCR(providers=providers)
 
-    def image_to_text(self, image_path: str) -> str:
+    def __call__(self, image_path: str):
         try:
             result, _ = self.ocr(image_path)
-            if result:
-                return " ".join([text for _, text, _ in result])
+            return result  # This is a list of (box, text, conf) tuples
         except Exception as e:
             from logging import error
             error(f"OCR error for {image_path}: {e}")
+        return []
+
+    def image_to_text(self, image_path: str) -> str:
+        result = self(image_path)
+        if result:
+            return " ".join([text for _, text, _ in result])
         return ""
