@@ -31,13 +31,16 @@ def run_ocr_on_files(files, output_csv):
         writer = csv.writer(f)
         writer.writerow(["filename", "text"])
         for img_path in files:
-            print(f"[🔍] OCR on: {img_path}")
-            result, _ = ocr(img_path)
-            if result:
-                text = " ".join([text for _, text, _ in result])
-            else:
-                text = ""
-            writer.writerow([os.path.basename(img_path), text])
+            try:
+                print(f"[🔍] OCR on: {img_path}")
+                result, _ = ocr(img_path)
+                if result:
+                    text = " ".join([text for _, text, _ in result])
+                else:
+                    text = ""
+                writer.writerow([os.path.basename(img_path), text])
+            except Exception as e:
+                print(f"[❌] Skipping {img_path}: {e}")
     print(f"[✅] Results saved to: {output_csv}")
 
 if __name__ == "__main__":
