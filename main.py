@@ -11,18 +11,19 @@ class RapidOCR_CPU(RapidOCR):
         ort.set_default_logger_severity(3)
         super().__init__(*args, providers=providers, **kwargs)
 
-def get_image_files(input_path):
-    image_exts = ['*.jpg', '*.jpeg', '*.png', '*.bmp', '*.tiff']
-    files = []
-    if os.path.isdir(input_path):
-        for ext in image_exts:
-            files.extend(glob.glob(os.path.join(input_path, ext)))
-    elif '*' in input_path or '?' in input_path:
-        for ext in image_exts:
-            files.extend(glob.glob(input_path))
-    elif os.path.isfile(input_path):
-        files = [input_path]
-    return sorted(set(files))
+def get_image_files(inputs):
+    image_files = []
+    for input_path in inputs:
+        if os.path.isdir(input_path):
+            # If it's a directory, add all image files inside
+            for fname in os.listdir(input_path):
+                fpath = os.path.join(input_path, fname)
+                if os.path.isfile(fpath) and fname.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.tiff', '.gif')):
+                    image_files.append(fpath)
+        else:
+            # If it's a file, just add it
+            image_files.append(input_path)
+    return image_files
 
 def run_ocr_on_files(files, output_csv):
     ocr = RapidOCR_CPU()
@@ -40,8 +41,8 @@ def run_ocr_on_files(files, output_csv):
     print(f"[✅] Results saved to: {output_csv}")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Parse Yeh Jpegs, and export to CSV")
-    parser.add_argument("input", help="Image file, directory, or wildcard (e.g. ./images/*.jpg)")
+    parser = argparse.ArgumentParser(description="Parse Yeh Pegs, and export to CSV")
+    parser.add_argument("input", nargs='+', help="Image file, directory, or wildcard (e.g. ./images/*.jpg)")
     parser.add_argument("-o", "--output", default="ocr_results.csv", help="CSV output filename")
     args = parser.parse_args()
 
