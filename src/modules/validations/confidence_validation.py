@@ -5,8 +5,11 @@ def get_average_confidence(result):
         return sum(result.scores) / len(result.scores)
     if isinstance(result, list) and result:
         try:
-            return sum(conf for *_ , conf in result) / len(result)
-        except Exception:
+            # Validate that each element is a sequence with at least two elements
+            if all(isinstance(item, (tuple, list)) and len(item) >= 2 for item in result):
+                return sum(conf for *_ , conf in result) / len(result)
+        except (ValueError, TypeError) as e:
+            # Log or handle the error appropriately (e.g., print or log the exception)
             pass
     return 0.0
 
