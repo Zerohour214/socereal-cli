@@ -12,7 +12,7 @@ install_requires = [
 ]
 
 setup(
-    name='ocrcli',
+    name='socereal',
     version='0.1.0',
     packages=find_packages('src'),
     package_dir={'': 'src'},
@@ -20,7 +20,7 @@ setup(
     install_requires=install_requires,
     entry_points={
         'console_scripts': [
-            'ocrcli=cli:main',
+            'socereal=cli:main',
         ],
     },
     description='Command-line OCR pipeline.',
