@@ -1,8 +1,10 @@
+"""Command-line interface for the OCR pipeline."""
 import argparse
 from .modules.logging_utils import setup_logging
 from .app import run_ocr_pipeline
 
 def parse_args():
+    """Parse command line arguments."""
     parser = argparse.ArgumentParser(
         description="CLI OCR tool: batch image-to-CSV"
     )
@@ -17,6 +19,7 @@ def parse_args():
     return parser.parse_args()
 
 def main():
+    """Entry point used by console scripts."""
     setup_logging()
     args = parse_args()
     run_ocr_pipeline(args.input, args.output, args.validation)

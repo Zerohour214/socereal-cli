@@ -1,3 +1,4 @@
+"""Validation for abnormal characters in OCR text."""
 import re
 from typing import Optional
 

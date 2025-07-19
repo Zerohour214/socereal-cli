@@ -1,22 +1,27 @@
+"""Validation helpers for OCR confidence scores."""
 def get_average_confidence(result):
-    """
-    Given a RapidOCROutput result, return the average confidence score (float).
-    """
-    if not hasattr(result, "scores") or not result.scores:
-        return 0.0
-    return sum(result.scores) / len(result.scores)
+    """Return the average confidence score from a RapidOCR result."""
+    if hasattr(result, "scores") and result.scores:
+        return sum(result.scores) / len(result.scores)
+    if isinstance(result, list) and result:
+        try:
+            # Validate that each element is a sequence with at least two elements
+            if all(isinstance(item, (tuple, list)) and len(item) >= 2 for item in result):
+                return sum(conf for *_ , conf in result) / len(result)
+        except (ValueError, TypeError) as e:
+            # Log or handle the error appropriately (e.g., print or log the exception)
+            pass
+    return 0.0
 
 def validate_confidence(result, threshold=0.90):
-    """
-    Return "OK" if average confidence is above threshold,
-    else a warning string.
-    """
-    avg_conf = sum(conf for _, _, conf in result) / len(result)
+    """Return a verdict string based on the average confidence score."""
+    avg_conf = get_average_confidence(result)
     if avg_conf < threshold:
         return f"Low confidence: {avg_conf:.2f}"
     return "OK"
 
 def extract_text_and_conf(result):
+    """Return extracted text and confidence structure from various result formats."""
     if hasattr(result, "txts") and hasattr(result, "scores"):
         text = " ".join(result.txts) if result.txts else ""
         return text, result

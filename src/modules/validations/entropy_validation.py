@@ -1,7 +1,9 @@
+"""Entropy-based validation utilities."""
 import math
 from collections import Counter
 
 def text_entropy(s):
+    """Calculate Shannon entropy for the given string."""
     if not s:
         return 0.0
     freq = Counter(s)
