@@ -1,6 +1,4 @@
-import io
-import sys
-from src.modules.validation import validate_text
+from src.modules.validations.symbol_validation import validate_text
 
 # A mock OCRService for testing
 class MockOCRService:

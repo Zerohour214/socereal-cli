@@ -1,5 +1,4 @@
 import re
-import logging
 from typing import Optional
 
 # List of characters/symbols considered "weird" (customize as needed)
