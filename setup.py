@@ -20,7 +20,7 @@ setup(
     install_requires=install_requires,
     entry_points={
         'console_scripts': [
-            'ocrcli=src.cli:main',
+            'ocrcli=cli:main',
         ],
     },
     description='Command-line OCR pipeline.',
