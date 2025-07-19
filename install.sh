@@ -12,8 +12,8 @@ if command -v socereal >/dev/null 2>&1; then
     echo "socereal installed and on PATH."
 else
     if [ -w "$HOME/.local/bin" ]; then
-        ln -sf "$(pwd)/venv/bin/socereal" "$HOME/.local/bin/socereal"
-        echo "symlinked socereal to $HOME/.local/bin."
+        cp venv/bin/socereal "$HOME/.local/bin/socereal"
+        echo "Copied socereal to $HOME/.local/bin."
     else
         echo "Could not place socereal on PATH. Building single binary."
         pip install pyinstaller
