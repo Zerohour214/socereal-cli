@@ -1,0 +1,8 @@
+Install and run the OCR CLI with these steps on Windows:
+
+1. Open Command Prompt.
+2. Run `install.bat` from this folder to set up a virtual environment and install the package.
+3. After installation, call the tool with `ocrcli <images> -o output.csv`.
+
+The installer uses Python and pip, so ensure Python 3.8+ is installed from
+https://www.python.org/downloads/windows/ .
