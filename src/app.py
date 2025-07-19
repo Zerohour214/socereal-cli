@@ -1,3 +1,4 @@
+"""Core application logic for running the OCR pipeline."""
 import logging
 from .modules.ocr_engine import OCRService
 from .modules.file_utils import collect_image_files
@@ -7,6 +8,7 @@ from .modules.validations.symbol_validation import validate_text
 from .modules.validations.entropy_validation import text_entropy
 
 def validate_entropy(text, min_e=2.0, max_e=5.5):
+    """Validate text entropy and return a verdict message."""
     e = text_entropy(text)
     if e < min_e or e > max_e:
         return f"Suspicious entropy: {e:.2f}"
@@ -20,6 +22,7 @@ VALIDATORS = {
 }
 
 def run_ocr_pipeline(inputs, output_csv, validations=None):
+    """Run OCR on inputs and save results to CSV."""
     ocr_service = OCRService()
     files = collect_image_files(inputs)
     results = []
