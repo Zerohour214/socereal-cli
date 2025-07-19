@@ -11,6 +11,7 @@ pip install .
 if command -v socereal >/dev/null 2>&1; then
     echo "socereal installed and on PATH."
 else
+    mkdir -p "$HOME/.local/bin"
     if [ -w "$HOME/.local/bin" ]; then
         cp venv/bin/socereal "$HOME/.local/bin/socereal"
         echo "Copied socereal to $HOME/.local/bin."
