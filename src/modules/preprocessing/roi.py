@@ -1,10 +1,9 @@
 """Pre-processing helpers for image regions."""
 import cv2
 
-def auto_crop_serial_region(
+
+def auto_crop_serial_region(image_path, region_height_ratio=0.7, region_width_ratio=0.95):
     """Crop the central region of an image used for OCR."""
-    image_path, region_height_ratio=0.7, region_width_ratio=0.95
-):
     img = cv2.imread(image_path)
     if img is None:
         raise FileNotFoundError(image_path)

@@ -1,11 +1,11 @@
 """Core application logic for running the OCR pipeline."""
 import logging
-from .modules.ocr_engine import OCRService
-from .modules.file_utils import collect_image_files
-from .adapters.csv_writer import write_ocr_results
-from .modules.validations.confidence_validation import validate_confidence, extract_text_and_conf
-from .modules.validations.symbol_validation import validate_text
-from .modules.validations.entropy_validation import text_entropy
+from src.modules.ocr_engine import OCRService
+from src.modules.file_utils import collect_image_files
+from src.adapters.csv_writer import write_ocr_results
+from src.modules.validations.confidence_validation import validate_confidence, extract_text_and_conf
+from src.modules.validations.symbol_validation import validate_text
+from src.modules.validations.entropy_validation import text_entropy
 
 def validate_entropy(text, min_e=2.0, max_e=5.5):
     """Validate text entropy and return a verdict message."""

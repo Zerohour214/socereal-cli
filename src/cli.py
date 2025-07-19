@@ -2,8 +2,8 @@
 import argparse
 from pathlib import Path
 
-from .modules.logging_utils import setup_logging
-from .app import run_ocr_pipeline
+from src.modules.logging_utils import setup_logging
+from src.app import run_ocr_pipeline
 
 def parse_args():
     """Parse command line arguments."""
