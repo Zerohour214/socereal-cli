@@ -1,5 +1,7 @@
 """Command-line interface for the OCR pipeline."""
 import argparse
+from pathlib import Path
+
 from .modules.logging_utils import setup_logging
 from .app import run_ocr_pipeline
 
@@ -22,7 +24,8 @@ def main():
     """Entry point used by console scripts."""
     setup_logging()
     args = parse_args()
-    run_ocr_pipeline(args.input, args.output, args.validation)
+    output = str(Path(args.output).expanduser())
+    run_ocr_pipeline(args.input, output, args.validation)
 
 if __name__ == "__main__":
     main()
