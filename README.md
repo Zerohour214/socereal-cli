@@ -109,7 +109,7 @@ src/
 │   └── csv_writer.py  # Writes CSV reports
 ├── modules/
 │   ├── ocr_engine.py  # Wrapper around RapidOCR
-│   ├── preprocessing/ # Image pre‑processing utilities
+│   ├── preprocessing/ # Image pre-processing utilities
 │   ├── validations/   # Validation helpers
 │   └── file_utils.py  # Collects image paths
 ```
