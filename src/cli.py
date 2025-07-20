@@ -12,7 +12,7 @@ def parse_args():
         """Example usage:
         socereal images/*.png -o results.csv -v confidence symbol entropy
 
-        This processes all PNG files, writes recognised text to results.csv
+        This processes all PNG files, writes recognised text to results.csv.
         and runs the confidence, symbol and entropy validations in that order.
         """
     )
