@@ -91,7 +91,7 @@ Each OCR result can be checked by one or more validation routines:
 
 - **Confidence** – warns if the average OCR confidence is below a threshold.
 - **Symbol** – reports if abnormal characters are present (e.g. emoji or
-  non‑ASCII symbols).
+  non-ASCII symbols).
 - **Entropy** – computes Shannon entropy of the text to detect anomalies.
 
 You may choose which validations to run by listing them after `-v`:
