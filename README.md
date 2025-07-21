@@ -8,6 +8,10 @@ validation checks.
 This document serves as the main documentation for the project. Each section can
 be navigated like a wiki using the table of contents below.
 
+Cause when life gives you lemon. Make Cereal.
+
+So Cereal - So Serious -Show Serial - So Surreal 
+
 ## Table of Contents
 - [Overview](#overview)
 - [Features](#features)
