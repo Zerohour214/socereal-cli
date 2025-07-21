@@ -39,10 +39,10 @@ writes the results to the specified CSV.
   - **confidence** – checks the average confidence of the OCR engine
   - **symbol** – flags abnormal characters in the text
   - **entropy** – warns if the text entropy is suspiciously high or low
-- Runs on Python 3.8 or newer and can be packaged as a standalone executable
+- Runs on Python 3.11.9 or newer and can be packaged as a standalone executable
 
 ## Installation
-1. Ensure you have **Python 3.8+** available on your system.
+1. Ensure you have **Python 3.11.9** available on your system and add to PATH.
 2. Install dependencies and the package itself:
 
 ```bash
