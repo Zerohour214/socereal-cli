@@ -5,6 +5,10 @@ batches of images. It wraps the [RapidOCR](https://github.com/RapidAI/RapidOCR)
 engine and produces a CSV report containing the recognized text along with several
 validation checks.
 
+SoCereal runs localy, so you don't have to worry about leaking data.
+SoCereal runs on CPU, so you can run on any computer that supports AVX.
+SoCereal have average processing time per image at approximately 1s
+
 This document serves as the main documentation for the project. Each section can
 be navigated like a wiki using the table of contents below.
 
