@@ -2,9 +2,11 @@
 import argparse
 from pathlib import Path
 import textwrap
+import glob
 
 from src.modules.logging_utils import setup_logging
 from src.app import run_ocr_pipeline
+
 
 def parse_args():
     """Parse command line arguments."""
@@ -64,7 +66,36 @@ def main():
     setup_logging()
     args = parse_args()
     output = str(Path(args.output).expanduser())
-    run_ocr_pipeline(args.input, output, args.validation)
+
+    # EXPAND INPUTS: wildcard/glob and directories
+    expanded_inputs = []
+    for arg in args.input:
+        # Expand globs (wildcards) like images/*.jpg
+        if '*' in arg or '?' in arg:
+            files = glob.glob(arg)
+            if not files:
+                print(f"WARNING: No files matched: {arg}")
+            expanded_inputs.extend(files)
+        else:
+            p = Path(arg)
+            if p.is_dir():
+                # Recursively gather image files from directories
+                supported_exts = ('.png', '.jpg', '.jpeg', '.bmp', '.tif', '.tiff', '.webp')
+                found = [str(f) for f in p.rglob("*") if f.suffix.lower() in supported_exts]
+                if not found:
+                    print(f"WARNING: No images found in directory: {arg}")
+                expanded_inputs.extend(found)
+            elif p.is_file():
+                expanded_inputs.append(str(p))
+            else:
+                print(f"WARNING: Skipping unsupported input: {arg}")
+
+    if not expanded_inputs:
+        print("ERROR: No valid input files found. Nothing to do.")
+        exit(1)
+
+    # Pass to your pipeline
+    run_ocr_pipeline(expanded_inputs, output, args.validation)
 
 if __name__ == "__main__":
     main()
