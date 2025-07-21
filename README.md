@@ -24,7 +24,7 @@ The CLI accepts one or more image files or directories and outputs the OCR
 results to a CSV file. A typical invocation looks like:
 
 ```bash
-socereal images/*.jpg -o results.csv
+socereal.exe image\* -o result.csv
 ```
 
 By default it performs OCR on every image, runs a few validation routines, and
